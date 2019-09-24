@@ -5,17 +5,19 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class LoadImportpageTest extends TestCase
 {
     /**
-     * A basic test example.
+     * A test to load the page.
      *
      * @return void
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $response = $this->get('/import');
 
         $response->assertStatus(200);
+        $response->assertSee('Homeowner Import');
+        $response->assertSee('Select a CSV to upload');
     }
 }
