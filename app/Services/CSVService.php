@@ -38,6 +38,15 @@ class CSVService
     }
 
     /**
+     * @faker - Used for unit testing to bypass the file upload and set data directly.
+     * @param array $data
+     */
+    public function setCsvData(array $data)
+    {
+        $this->csvData = $data;
+    }
+
+    /**
      * Parse a CSV file and save the data to the protected property on this class.
      *
      * @param $file
