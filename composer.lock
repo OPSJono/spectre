@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4dc978913bbfad2c94dcac5c9bfc3f92",
-    "content-hash": "3a81ea5a73ebc29fdd013d76177a616e",
+    "hash": "ba18eb113d364588ecb48833edd5c923",
+    "content-hash": "5ce7ba44f8a55c780484c9d9fa9d8747",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -468,6 +468,33 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29 18:48:56"
+        },
+        {
+            "name": "joshfraser/php-name-parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joshfraser/PHP-Name-Parser.git",
+                "reference": "3a5db3ae6163cc5c58c7ab952b469b54cd374380"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joshfraser/PHP-Name-Parser/zipball/3a5db3ae6163cc5c58c7ab952b469b54cd374380",
+                "reference": "3a5db3ae6163cc5c58c7ab952b469b54cd374380",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "parser.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "PHP library to split names into their respective components (first, last, etc)",
+            "time": "2019-01-30 00:44:53"
         },
         {
             "name": "laravel/framework",

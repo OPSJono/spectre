@@ -13,6 +13,6 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-
+Route::any('/import', ['uses' => 'Import\ImportController@import'])->name('import');
