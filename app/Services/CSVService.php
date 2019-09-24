@@ -124,7 +124,12 @@ class CSVService
                 }
 
                 // Save the record.
-                $results[] = $name;
+                $results[] = [
+                    'title' => $this->valueOrNull($name['salutation'] ?? ''),
+                    'first_name' => $this->valueOrNull($name['fname'] ?? ''),
+                    'initial' => $this->valueOrNull($name['initials'] ?? ''),
+                    'last_name' => $this->valueOrNull($name['lname'] ?? ''),
+                ];
             }
         }
 
@@ -135,6 +140,16 @@ class CSVService
 
 
         return $results;
+    }
+
+    private function valueOrNull(string $value = '')
+    {
+        if(empty($value)) {
+            return null;
+        }
+
+        return $value;
+
     }
 
     /**

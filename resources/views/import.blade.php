@@ -47,10 +47,10 @@
                 @foreach($results as $key => $result)
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
-                        <td>{{ $result['salutation'] ?? '' }}</td>
-                        <td>{{ $result['fname'] ?? '' }}</td>
-                        <td>{{ $result['initials'] ?? '' }}</td>
-                        <td>{{ $result['lname'] ?? '' }}</td>
+                        <td>{{ $result['title'] ?? '' }}</td>
+                        <td>{{ $result['first_name'] ?? '' }}</td>
+                        <td>{{ $result['initial'] ?? '' }}</td>
+                        <td>{{ $result['last_name'] ?? '' }}</td>
                     </tr>
                 @endforeach
             </tbody>
