@@ -1,0 +1,58 @@
+---
+server_common_packages:
+  - gcc
+  - g++
+  - make
+  - vim
+  - htop
+  - iotop
+  - pv
+  - screen
+  - git
+  - tcpdump
+  - rsync
+  - build-essential
+  - nfs-common
+  - dos2unix
+  - sysbench
+
+  # Install composer PHP package manager
+  - composer
+  - unzip
+
+  # Enables support for the HTTPS protocol in APT sources
+  - apt-transport-https
+  # Used to perform API requests
+  - curl
+  # Enables automation of programs and scripts that ask for user input
+  - expect
+  # Used to verify GPG signatures for mirrored packages
+  - gnupg
+  # Used for documentation generation
+  - markdown
+  # Ensures the server's clock is set properly
+  - ntp
+  # Required to use the Ansible `expect` module
+  - python-pexpect
+  # Required for the apt_repository module
+  - python-software-properties
+  # Used to generate convenient QR codes for mobile clients in the
+  # Shadowsocks and Tor roles
+  #  - qrencode
+  # Used for automatically installing security updates
+  - unattended-upgrades
+
+  ######
+#  sudo apt-get install libssl1.0.0=1.0.2g-1ubuntu4
+#  sudo apt-get install libssl-dev=1.0.2g-1ubuntu4
+#  sudo apt-mark hold libssl-dev
+#  refs:
+#  https://github.com/barryvdh/laravel-snappy/issues/217
+#  https://bugreports.qt.io/browse/QTBUG-52905
+#  https://wiki.qt.io/Qt_5.10_Release
+#
+#  We have an issue with wkhtmltopdf due to a bug in QT. So we require an older version of libssl and libssl-dev
+#  QT 5.10.x should fix this bug
+  ######
+  - libssl1.0.0=1.0.2g-1ubuntu4
+  - libssl-dev=1.0.2g-1ubuntu4

@@ -1,0 +1,32 @@
+---
+- name: Ensure the APT cache is up to date
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Install common utilties
+  apt:
+    name: "{{ server_common_packages }}"
+    force: yes
+
+  ######
+#  sudo apt-get install libssl1.0.0=1.0.2g-1ubuntu4
+#  sudo apt-get install libssl-dev=1.0.2g-1ubuntu4
+#  sudo apt-mark hold libssl-dev
+#  refs:
+#  https://github.com/barryvdh/laravel-snappy/issues/217
+#  https://bugreports.qt.io/browse/QTBUG-52905
+#  https://wiki.qt.io/Qt_5.10_Release
+#
+#  We have an issue with wkhtmltopdf due to a bug in QT. So we require an older version of libssl and libssl-dev
+#  QT 5.10.x should fix this bug
+  ######
+
+- name: get list of "apt-mark showhold" packages
+  command: apt-mark showhold
+  register: held_packages
+  changed_when: false
+
+- name: Add libssl-dev to the list of hold packages if not already in there.
+  command: apt-mark hold libssl-dev
+  when: '"libssl-dev" not in held_packages.stdout'

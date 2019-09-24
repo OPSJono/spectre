@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+    ServerName spectre.marshall.vm
+    ServerAlias *.marshall.vm
+    DocumentRoot /vagrant/public/
+
+    # This will enable the Rewrite capabilities
+    RewriteEngine On
+    # This checks to make sure the connection is not already HTTPS
+    RewriteCond %{HTTP:X-Forwarded-Proto} https
+    # Force to HTTP
+    RewriteRule ^ http://%{SERVER_NAME}%{REQUEST_URI} [L,R]
+
+    <Directory /vagrant/public/>
+        Options FollowSymLinks
+        AllowOverride all
+        Order allow,deny
+        Allow from all
+        Require all granted
+    </Directory>
+
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride None
+    </Directory>
+
+    DirectoryIndex index.php index.html
+</VirtualHost>
+

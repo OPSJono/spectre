@@ -1,0 +1,27 @@
+---
+- hosts: all
+  name: Provision Virtual Machine
+  remote_user: root
+  become: true
+  gather_facts: no
+  pre_tasks:
+  ## Make sure Python 2 is installed so Ansible can run.
+    - name: install python 2
+      raw: test -e /usr/bin/python || (sudo apt -y update && sudo apt install -y python-minimal)
+      changed_when: False
+
+  vars:
+    - ansible_os_family: "Debian"
+    - ansible_distribution: "Ubuntu"
+    - ansible_distribution_version: "16.04"
+    - php_default_version_debian: "7.2"
+
+  roles:
+    - common
+    - geerlingguy.apache
+    - geerlingguy.mysql
+    - geerlingguy.php
+    - geerlingguy.nodejs
+    - geerlingguy.redis
+    - marshall.yarn
+    - marshall.vagrant

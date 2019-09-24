@@ -1,0 +1,88 @@
+---
+- name: Add {customer}.marshall.vm and {customer}.marshall.dev to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    line: "127.0.0.1 {{ item.name }}.marshall.vm"
+  with_items: "{{ mysql_databases }}"
+
+- name: Copy Xdebug config into place
+  copy:
+    src: templates/xdebug.ini
+    dest: "/etc/php/{{ php_default_version_debian }}/mods-available/xdebug.ini"
+
+- name: Add /vagrant/vagrant/tools to the $PATH
+  lineinfile:
+    path: "/home/vagrant/.bashrc"
+    state: present
+    line: 'export PATH=$PATH:/vagrant/vagrant/tools'
+
+- name: Set permissions of 0775 on the importDatabase.sh
+  file:
+    path: "/vagrant/vagrant/tools/importDatabase.sh"
+    mode: 0775
+
+- name: Allow sudo usage without entering a password everytime
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+
+- name: Make sure /vagrant/storage has enough permissions
+  shell: sudo chmod -R 775 /vagrant/storage
+
+- name: modify apache2 to run as vagrant user
+  lineinfile:
+    dest: /etc/apache2/envvars
+    state: present
+    regexp: '^export APACHE_RUN_USER='
+    line: export APACHE_RUN_USER=vagrant
+
+- name: modify apache2 to run as vagrant group
+  lineinfile:
+    dest: /etc/apache2/envvars
+    state: present
+    regexp: '^export APACHE_RUN_GROUP='
+    line: export APACHE_RUN_GROUP=vagrant
+
+- name: Disable default apache site
+  file:
+    dest: /etc/apache2/sites-enabled/000-default.conf
+    state: absent
+
+- name: Composer Install
+  command: /usr/bin/composer install
+  args:
+    chdir: /vagrant/
+  become: true
+  become_user: vagrant
+
+- name: Yarn Install
+  command: /usr/bin/yarn install
+  args:
+    chdir: /vagrant/
+  become: true
+  become_user: vagrant
+
+- name: NPM run dev
+  command: /usr/bin/npm run dev
+  args:
+    chdir: /vagrant/
+  become: true
+  become_user: vagrant
+
+- name: symlink laravel folder to home
+  file:
+    src: /vagrant
+    dest: /home/vagrant/laravel
+    state: link
+
+- name: symlink ad-hoc folder to home
+  file:
+    src: /vagrant/ad-hoc
+    dest: /home/vagrant/ad-hoc
+    state: link
+
+- service:
+    name: apache2
+    state: restarted

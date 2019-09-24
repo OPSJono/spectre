@@ -1,0 +1,21 @@
+---
+- name: Ensure apt-transport-https is installed.
+  apt: name=apt-transport-https state=present
+
+- name: Add Yarn apt key.
+  shell: "curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -"
+
+- name: Add YarnPkg repositories for Yarn
+  apt_repository:
+    repo: deb https://dl.yarnpkg.com/debian/ stable main
+    state: present
+  register: yarn_repo
+
+- name: Update apt cache if repo was added.
+  apt: update_cache=yes
+  when: yarn_repo.changed
+
+- name: Ensure Yarn is installed.
+  apt:
+    name: yarn
+    state: present

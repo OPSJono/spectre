@@ -1,0 +1,34 @@
+---
+- name: add apache2 to logrotate
+  template:
+    src: apache-logrotate.j2
+    dest: /etc/logrotate.d/apache2
+    owner: root
+    group: root
+    mode: 0644
+
+- name: create apache2 configuration (VLE)
+  template:
+    src: vm_apache.conf.j2
+    dest: "/etc/apache2/sites-available/001-development-local.conf"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Add vhost symlink in sites-enabled. (VLE)
+  file:
+    src: "/etc/apache2/sites-available/001-development-local.conf"
+    dest: "/etc/apache2/sites-enabled/001-development-local.conf"
+    state: link
+
+- name: Set apache KeepAliveTimeout to 120 seconds
+  lineinfile:
+    dest: /etc/apache2/apache2.conf
+    state: present
+    regexp: '^KeepAliveTimeout'
+    line: "KeepAliveTimeout 120"
+
+- name: restart apache
+  service:
+    name: apache2
+    state: restarted
