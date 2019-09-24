@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use \Illuminate\Contracts\View\Factory;
 use \Illuminate\View\View;
 
+/**
+ * Class ImportController
+ * @package App\Http\Controllers\Import
+ */
 class ImportController extends Controller
 {
     /**
@@ -43,7 +47,6 @@ class ImportController extends Controller
                 $file = $request->file('file');
                 $this->csvService->readFileToData($file);
                 $results = $this->csvService->getData();
-
             }
         }
 

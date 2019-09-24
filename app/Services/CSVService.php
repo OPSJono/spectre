@@ -98,7 +98,6 @@ class CSVService
 
                 // If there is no valid surname, look to take the forename as the surname.
                 if(empty($name['lname'])) {
-
                     if(!empty($name['fname'])) {
                         $name['lname'] = $name['fname'];
                         $name['fname'] = null;
@@ -138,10 +137,16 @@ class CSVService
             unlink($this->savedFile);
         }
 
-
         return $results;
     }
 
+    /**
+     * Return the given string, or null if the string is empty.
+     *
+     * @param string $value
+     *
+     * @return string|null
+     */
     private function valueOrNull(string $value = '')
     {
         if(empty($value)) {
@@ -149,7 +154,6 @@ class CSVService
         }
 
         return $value;
-
     }
 
     /**

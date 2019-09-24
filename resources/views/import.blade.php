@@ -18,7 +18,6 @@
                     </div>
                 @endif
 
-
                 <div class="form-group row">
                     <div class="col-6 text-right {{ $errors->has('file') ? 'text-danger' : null }}">
                         <label for="file" class="form-label">Select a CSV to upload <sup>*</sup></label>
@@ -55,6 +54,5 @@
                 @endforeach
             </tbody>
         </table>
-
     @endif
 @stop
