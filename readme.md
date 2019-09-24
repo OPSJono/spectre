@@ -4,7 +4,9 @@ By Jonathan Marshall on 24th September 2019.
 It is a standard Laravel repository and can be hosted anywhere you would usually host a Laravel application.  
 
 I have provided a Vagrant virtual machine which can host the application locally for you.  
-The instructions are aimed at OSX machines.
+The instructions are aimed at OSX machines.  
+
+If you have used Vagrant with VirtualBox before, you can ignore the majority of this and skip right to the 'vagrant up' part.
 
 ---
 OSX Setup
