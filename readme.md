@@ -56,4 +56,10 @@ Edit local hosts: `vim /etc/hosts` add this line to the bottom:
 192.168.77.77 spectre.marshall.vm
 ```
 
+SSH into the VM and generate the application key:
+- `vagrant ssh`
+- `cd /vagrant`
+- `cp .env.example .env`
+- `php artisan key:generate`
+
 Open http://spectre.marshall.vm in your browser.  
