@@ -53,6 +53,5 @@ Edit local hosts: `vim /etc/hosts` add this line to the bottom:
 ```
 192.168.77.77 spectre.marshall.vm
 ```
-Copy the provided .env file into the root of the repo. 
 
 Open http://spectre.marshall.vm in your browser.  
