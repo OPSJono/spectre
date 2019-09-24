@@ -113,7 +113,7 @@ class CSVService
 
                         if(isset($results[$resultsSoFar - 1])) {
                             // set previous person last name from this record.;
-                            $results[$resultsSoFar - 1]['lname'] = $name['lname'];
+                            $results[$resultsSoFar - 1]['last_name'] = $name['lname'];
                         }
                     }
 
